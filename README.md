@@ -2,7 +2,7 @@
 
 ## Подготовка
 
-На хосте c Ubuntu должен быть установлен Ansible.
+На хосте c Ubuntu, на котором будет установлен WordPress должен быть установлен Ansible.
 ```
 sudo apt update
 sudo apt install ansible
