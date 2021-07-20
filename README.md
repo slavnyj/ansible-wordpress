@@ -7,7 +7,7 @@
 sudo apt update
 sudo apt install ansible
 ```
-Клонируем репозиторий
+На локальный хост клонируем репозиторий
 ```
 git clone https://github.com/slavnyj/ansible-wordpress.git
 cd ansible-wordpress
