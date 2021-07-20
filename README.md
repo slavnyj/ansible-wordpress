@@ -11,7 +11,18 @@ sudo apt install ansible
 git clone https://github.com/slavnyj/ansible-wordpress.git
 cd ansible-wordpress
 ```
-Для локальной утсановки WordPress, выполняем
+Для локальной установки WordPress, выполняем
 ```
 ansible-playbook site.yaml
 ```
+
+На сервере будет установлен:
+- WordPress (последняя версия)
+- UFW
+- MariaDB (последняя версия)
+- NGINX (последняя версия)
+- Postfix
+- PHP-FPM 7.4
+- phpMyAdmin
+- Redis
+- SFTP
