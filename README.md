@@ -14,7 +14,7 @@ cd ansible-wordpress
 ```
 ## Для локальной установки WordPress, выполняем
 ```
-ansible-playbook site.yaml
+ansible-playbook site.yaml -i localhost
 ```
 ## Для установки WordPress на удаленном сервере
 #### Все действия производятся на локальном сервере, куда был склонирован репозиторий https://github.com/slavnyj/ansible-wordpress.git
