@@ -1,0 +1,3 @@
+---
+- name: restart php7.4-fpm
+  shell: service php7.4-fpm restart

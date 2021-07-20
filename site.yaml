@@ -1,0 +1,17 @@
+---
+- name: Install WordPress, MySQL, Nginx, and PHP-FPM
+  hosts: localhost
+  remote_user: "{{remote_user}}"
+  sudo: yes
+
+  roles:
+    - common
+    - ufw
+    - mariadb
+    - nginx
+    - postfix
+    - php-fpm
+    - phpmyadmin  
+    - redis 
+    - wordpress
+    - sftp

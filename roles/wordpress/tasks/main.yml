@@ -1,0 +1,50 @@
+---
+- name: Create directory for web files
+  file: path=/var/www/html state=directory
+
+- name: Download WordPress
+  get_url: url=https://wordpress.org/latest.tar.gz dest=/var/www/html/wordpress.tar.gz force=yes
+
+- name: Extract archive
+  unarchive: src=/var/www/html/wordpress.tar.gz dest=/var/www/html/ copy=no creates=/var/www/html/wordpress
+
+- name: Add group "wordpress"
+  group: name=wordpress
+
+- name: Add user "wordpress"
+  user: name=wordpress group=wordpress home=/var/www/html/wordpress/
+
+- name: Fetch random salts for WordPress config
+  local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
+  register: "wp_salt"
+  sudo: no
+
+- name: Create WordPress database
+  mysql_db: name={{ wp_db_name }} state=present
+
+- name: Create WordPress database user
+  mysql_user: name={{ wp_db_user }} password={{ wp_db_password }} priv={{ wp_db_name }}.*:ALL host='localhost' state=present
+
+- name: Copy WordPress config file
+  template: src=wp-config.php dest=/var/www/html/wordpress/ force=no
+
+- name: Copy WordPress redis drop in
+  template: src=object-cache.php dest=/var/www/html/wordpress/wp-content
+
+- name: Copy Batcache drop in
+  template: src=advanced-cache.php dest=/var/www/html/wordpress/wp-content
+
+- name: Change ownership of WordPress installation
+  file: path=/var/www/html/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes mode=0775
+
+- name: Download WP-CLI
+  get_url: url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar dest=/tmp/wp-cli.phar
+
+- name: Add WP-CLI to bin
+  command: mv /tmp/wp-cli.phar /usr/local/bin/wp creates=/usr/local/bin/wp
+
+- name: Make WP-CLI executable
+  file: path=/usr/local/bin/wp owner={{remote_user}} group=wordpress mode=770
+
+- name: Start php-fpm Service
+  service: name=php7.4-fpm state=started enabled=yes

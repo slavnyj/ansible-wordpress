@@ -1,0 +1,21 @@
+---
+- name: Apt-get update 
+  apt:
+   update_cache: yes
+
+- name: Install utilities
+  apt: name={{item}} state=latest
+  ignore_errors: yes
+  with_items:
+    - vim
+    - git
+    - subversion
+    - unzip
+    - python-pip
+    - python-dev
+    - build-essential
+    - software-properties-common  
+
+- name: Set timezone variables
+  timezone:
+    name: '{{ timezone }}'
