@@ -5,6 +5,7 @@
 На хосте c Ubuntu, на котором будет установлен WordPress должен быть установлен Ansible.
 ```
 sudo apt update
+sudo apt install python
 sudo apt install ansible
 ```
 На локальный хост клонируем репозиторий
