@@ -23,7 +23,7 @@ ansible-playbook site.yaml
 ```
 ssh-keygen
 ```
-2. Настраиваем удаленный хост, где username - пользователь на удаленном сервере,  remote_host - ip или dns удаленного сервера
+2. Настраиваем удаленный хост, где `username` - пользователь на удаленном сервере, под которым будет выполняться установка WordPress (см. `remote_user` ниже в таблице), `remote_host` - ip или dns удаленного сервера.
 ```
 ssh-copy-id username@remote_host
 ```
