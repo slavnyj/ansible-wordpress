@@ -17,6 +17,8 @@ cd ansible-wordpress
 ansible-playbook site.yaml
 ```
 ## Для установки WordPress на удаленном сервере
+#### Все действия производятся на локальном сервере, куда был склонирован репозиторий https://github.com/slavnyj/ansible-wordpress.git
+
 1. Создаем пары ключей SSH
 ```
 ssh-keygen
